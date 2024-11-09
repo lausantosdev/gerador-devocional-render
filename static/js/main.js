@@ -17,7 +17,8 @@
 
         async function showThemeList() {
             document.getElementById('initial-selection').classList.add('hidden');
-            document.getElementById('loading').classList.remove('hidden');
+            document.getElementById('loading').classList.add('hidden');
+            document.getElementById('themes-loading').classList.remove('hidden');
             
             try {
                 const response = await fetch(`${API_URL}/themes`);
@@ -28,7 +29,7 @@
                     `<button class="theme-button" onclick="generateDevotional('list', '${theme}')">${theme}</button>`
                 ).join('');
                 
-                document.getElementById('loading').classList.add('hidden');
+                document.getElementById('themes-loading').classList.add('hidden');
                 document.getElementById('theme-list').classList.remove('hidden');
             } catch (error) {
                 console.error('Erro ao carregar temas:', error);
