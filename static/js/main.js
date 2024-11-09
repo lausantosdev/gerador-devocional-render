@@ -2,6 +2,7 @@
         
         function showManualInput() {
             document.getElementById('initial-selection').classList.add('hidden');
+            document.getElementById('devotional-result').classList.add('hidden');
             document.getElementById('manual-input').classList.remove('hidden');
         }
 
