@@ -11,6 +11,14 @@ generator = DevotionalGenerator()
 def home():
     return render_template('index.html')
 
+@app.route('/themes', methods=['GET'])
+def get_themes():
+    try:
+        themes = generator.generate_themes()
+        return jsonify(themes)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
 @app.route('/generate', methods=['POST'])
 def generate():
     try:
