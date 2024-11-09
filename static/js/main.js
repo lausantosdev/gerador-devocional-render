@@ -63,13 +63,21 @@
 
                 const result = await response.json();
                 
-                // Atualiza o conteúdo do devocional e da oração
+                // Atualiza o conteúdo
                 document.getElementById('devotional-text').innerHTML = 
                     result.devotional.split('\n').map(p => `<p>${p}</p>`).join('');
                 document.getElementById('prayer-text').innerHTML = 
                     result.prayer.split('\n').map(p => `<p>${p}</p>`).join('');
                 
-                // Esconde o loading e mostra o resultado
+                // Configura o botão voltar baseado na origem
+                const backButton = document.querySelector('#devotional-result .button-group button');
+                backButton.onclick = mode === 'list' 
+                    ? () => {
+                        document.getElementById('devotional-result').classList.add('hidden');
+                        document.getElementById('theme-list').classList.remove('hidden');
+                      }
+                    : () => showManualInput();
+                
                 document.getElementById('loading').classList.add('hidden');
                 document.getElementById('devotional-result').classList.remove('hidden');
                 
