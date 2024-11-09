@@ -1,0 +1,172 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f3e8ff;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+h1 {
+    color: #6b21a8;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.theme-selector {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+.button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.primary-button {
+    background-color: #6b21a8;
+    color: white;
+}
+
+.primary-button:hover {
+    background-color: #581c87;
+}
+
+.secondary-button {
+    background-color: #e9d5ff;
+    color: #6b21a8;
+}
+
+.secondary-button:hover {
+    background-color: #d8b4fe;
+}
+
+.hidden {
+    display: none;
+}
+
+#manual-input {
+    text-align: center;
+    margin-top: 20px;
+}
+
+input[type="text"] {
+    padding: 10px;
+    width: 80%;
+    max-width: 400px;
+    margin-bottom: 10px;
+    border: 1px solid #d8b4fe;
+    border-radius: 5px;
+}
+
+#theme-list {
+    margin-top: 20px;
+}
+
+.theme-button {
+    margin: 5px;
+    padding: 10px 15px;
+    background-color: #f3e8ff;
+    border: 1px solid #d8b4fe;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.theme-button:hover {
+    background-color: #e9d5ff;
+}
+
+#loading {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.devotional-content, .prayer-content {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f9f5ff;
+    border-radius: 5px;
+}
+
+h2 {
+    color: #6b21a8;
+    margin-bottom: 15px;
+}
+
+.startup-loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    z-index: 1000;
+}
+
+.startup-loading.hidden {
+    display: none;
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #6b21a8;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 20px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #4c1d95;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    z-index: 1000;
+    transition: opacity 0.3s ease;
+}
+
+.toast.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.toast.visible {
+    opacity: 1;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    justify-content: center;
+}

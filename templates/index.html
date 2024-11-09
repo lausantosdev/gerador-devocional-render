@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Devocionais</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Gerador de Devocionais</h1>
+        
+        <div id="initial-selection" class="theme-selector">
+            <button class="button primary-button" onclick="showManualInput()">Inserir tema manualmente</button>
+            <button class="button secondary-button" onclick="showThemeList()">Escolher da lista de sugestões</button>
+            <button class="button secondary-button" onclick="showHistory()">Ver Histórico</button>
+        </div>
+
+        <div id="manual-input" class="hidden">
+            <input type="text" id="manual-theme" placeholder="Digite o tema do devocional">
+            <button class="button primary-button" onclick="generateDevotional('manual')">Gerar Devocional</button>
+            <button class="button secondary-button" onclick="showInitialSelection()">Voltar</button>
+        </div>
+
+        <div id="theme-list" class="hidden">
+            <div id="themes-container"></div>
+            <button class="button secondary-button" onclick="showInitialSelection()">Voltar</button>
+        </div>
+
+        <div id="loading" class="hidden">
+            <p>Gerando devocional...</p>
+        </div>
+
+        <div id="startup-loading" class="startup-loading hidden">
+            <div class="loading-spinner"></div>
+            <p>Iniciando o serviço, por favor aguarde...</p>
+        </div>
+
+        <div id="toast" class="toast hidden">
+            <span id="toast-message"></span>
+        </div>
+
+        <div id="devotional-result" class="hidden">
+            <div class="devotional-content">
+                <div class="content-header">
+                    <h2>Devocional</h2>
+                    <button class="copy-button" onclick="copyContent('devotional-text')">
+                        <span class="copy-icon">📋</span> Copiar
+                    </button>
+                </div>
+                <div id="devotional-text"></div>
+            </div>
+            
+            <div class="prayer-content">
+                <div class="content-header">
+                    <h2>Oração</h2>
+                    <button class="copy-button" onclick="copyContent('prayer-text')">
+                        <span class="copy-icon">📋</span> Copiar
+                    </button>
+                </div>
+                <div id="prayer-text"></div>
+            </div>
+
+            <div class="button-group">
+                <button class="button secondary-button" onclick="showInitialSelection()">
+                    Voltar ao Início
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
