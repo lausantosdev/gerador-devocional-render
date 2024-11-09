@@ -175,3 +175,37 @@ h2 {
     text-align: center;
     margin: 20px 0;
 }
+
+.history-item {
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.history-date {
+    color: #666;
+    font-size: 0.9em;
+    margin: 5px 0;
+}
+
+.history-content {
+    margin-top: 15px;
+}
+
+.no-history {
+    text-align: center;
+    color: #666;
+    padding: 20px;
+}
+
+.history-item h3 {
+    color: #6a1b9a;
+    margin: 0;
+}
+
+.history-item h4 {
+    color: #9c27b0;
+    margin: 10px 0;
+}

@@ -149,3 +149,32 @@
                 console.error('Erro ao copiar:', err);
             }
         }
+
+        function showHistory() {
+            const history = JSON.parse(localStorage.getItem('devotionalHistory') || '[]');
+            const historyContainer = document.getElementById('history-container');
+            
+            if (history.length === 0) {
+                historyContainer.innerHTML = '<p class="no-history">Nenhum devocional salvo ainda.</p>';
+            } else {
+                historyContainer.innerHTML = history.map((item, index) => `
+                    <div class="history-item">
+                        <h3>Tema: ${item.theme}</h3>
+                        <p class="history-date">Data: ${new Date(item.date).toLocaleDateString('pt-BR')}</p>
+                        <div class="history-content">
+                            <div class="devotional-section">
+                                <h4>Devocional</h4>
+                                ${item.content}
+                            </div>
+                            <div class="prayer-section">
+                                <h4>Oração</h4>
+                                ${item.prayer}
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            
+            document.getElementById('initial-selection').classList.add('hidden');
+            document.getElementById('history-section').classList.remove('hidden');
+        }
