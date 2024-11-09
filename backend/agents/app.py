@@ -1,6 +1,11 @@
 from flask import Flask, render_template, jsonify, request
+from flask_cors import CORS
+from devotional_generator import DevotionalGenerator
 
 app = Flask(__name__, template_folder='../../templates', static_folder='../../static')
+CORS(app)
+
+generator = DevotionalGenerator()
 
 @app.route('/')
 def home():
@@ -8,12 +13,12 @@ def home():
 
 @app.route('/generate', methods=['POST'])
 def generate():
-    theme = request.json.get('theme')
-    # Aqui você pode adicionar a lógica de geração do devocional
-    return jsonify({
-        'devotional': 'Texto do devocional aqui...',
-        'prayer': 'Texto da oração aqui...'
-    })
+    try:
+        theme = request.json.get('theme')
+        result = generator.generate_content(theme)
+        return jsonify(result)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
     app.run(debug=True)
