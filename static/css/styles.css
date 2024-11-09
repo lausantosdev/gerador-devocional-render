@@ -170,3 +170,8 @@ h2 {
     margin-top: 20px;
     justify-content: center;
 }
+
+.loading-message {
+    text-align: center;
+    margin: 20px 0;
+}
