@@ -38,6 +38,8 @@
             document.getElementById('theme-list').classList.add('hidden');
             document.getElementById('loading').classList.add('hidden');
             document.getElementById('devotional-result').classList.add('hidden');
+            document.getElementById('history-section').classList.add('hidden');
+            
             document.getElementById('initial-selection').classList.remove('hidden');
             document.getElementById('manual-theme').value = '';
         }
@@ -151,6 +153,16 @@
         }
 
         function showHistory() {
+            // Esconde todas as outras seções primeiro
+            document.getElementById('initial-selection').classList.add('hidden');
+            document.getElementById('manual-input').classList.add('hidden');
+            document.getElementById('theme-list').classList.add('hidden');
+            document.getElementById('loading').classList.add('hidden');
+            document.getElementById('devotional-result').classList.add('hidden');
+            
+            // Mostra a seção de histórico
+            document.getElementById('history-section').classList.remove('hidden');
+            
             const history = JSON.parse(localStorage.getItem('devotionalHistory') || '[]');
             const historyContainer = document.getElementById('history-container');
             
@@ -159,7 +171,12 @@
             } else {
                 historyContainer.innerHTML = history.map((item, index) => `
                     <div class="history-item">
-                        <h3>Tema: ${item.theme}</h3>
+                        <div class="history-header">
+                            <h3>Tema: ${item.theme}</h3>
+                            <button class="delete-button" onclick="deleteHistoryItem(${index})">
+                                <span class="delete-icon">🗑️</span>
+                            </button>
+                        </div>
                         <p class="history-date">Data: ${new Date(item.date).toLocaleDateString('pt-BR')}</p>
                         <div class="history-content">
                             <div class="devotional-section">
@@ -174,7 +191,20 @@
                     </div>
                 `).join('');
             }
-            
-            document.getElementById('initial-selection').classList.add('hidden');
-            document.getElementById('history-section').classList.remove('hidden');
+        }
+
+        function clearHistory() {
+            if (confirm('Tem certeza que deseja limpar todo o histórico? Esta ação não pode ser desfeita.')) {
+                localStorage.removeItem('devotionalHistory');
+                showToast('Histórico limpo com sucesso!');
+                showHistory(); // Atualiza a visualização
+            }
+        }
+
+        function deleteHistoryItem(index) {
+            let history = JSON.parse(localStorage.getItem('devotionalHistory') || '[]');
+            history.splice(index, 1);
+            localStorage.setItem('devotionalHistory', JSON.stringify(history));
+            showToast('Item removido do histórico!');
+            showHistory(); // Atualiza a visualização
         }
