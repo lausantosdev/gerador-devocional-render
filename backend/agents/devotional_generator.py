@@ -29,15 +29,23 @@ class DevotionalGenerator:
     def generate_themes(self) -> List[str]:
         theme_task = Task(
             description="""
-            Gere 10 temas relevantes para devocionais cristãos.
+            Gere 10 temas relevantes para devocionais direcionados a mulheres cristãs.
             
             Regras importantes:
-            - Temas variados e relevantes para mulheres cristãs
-            - Temas práticos e aplicáveis ao dia a dia
-            - Evite temas muito abstratos
+            - Foque em desafios emocionais e espirituais universais
+            - Inclua temas sobre: fé, identidade em Cristo, propósito, relacionamentos
+            - Aborde questões como: ansiedade, autoestima, confiança em Deus
+            - Use linguagem acolhedora e empática
+            - Evite temas específicos sobre maternidade ou carreira
             - Use Português do Brasil
+            
+            Exemplos de temas:
+            - Encontrando paz em meio às tribulações
+            - Fortalecendo a identidade em Cristo
+            - Cultivando um coração grato
+            - Superando a ansiedade com fé
             """,
-            expected_output="Lista com 10 temas para devocionais",
+            expected_output="Lista com 10 temas relevantes e específicos para mulheres cristãs",
             agent=self.agent
         )
 
