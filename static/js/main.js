@@ -1,5 +1,32 @@
         const API_URL = 'http://localhost:5000';
         
+        let currentTheme = '';
+
+        const saveToHistory = () => {
+            try {
+                const devotional = {
+                    theme: currentTheme,
+                    content: document.getElementById('devotional-text').innerHTML,
+                    prayer: document.getElementById('prayer-text').innerHTML,
+                    date: new Date().toISOString(),
+                };
+
+                let history = JSON.parse(localStorage.getItem('devotionalHistory') || '[]');
+                history.unshift(devotional);
+                
+                if (history.length > 10) {
+                    history = history.slice(0, 10);
+                }
+                
+                localStorage.setItem('devotionalHistory', JSON.stringify(history));
+                showToast('Devocional salvo no histórico!');
+            } catch (error) {
+                console.error('Erro ao salvar no histórico:', error);
+            }
+            
+            return false;
+        };
+
         function showManualInput() {
             document.getElementById('initial-selection').classList.add('hidden');
             document.getElementById('devotional-result').classList.add('hidden');
@@ -39,11 +66,11 @@
         }
 
         async function generateDevotional(mode, selectedTheme = '') {
-            const theme = mode === 'manual' 
+            currentTheme = mode === 'manual' 
                 ? document.getElementById('manual-theme').value 
                 : selectedTheme;
             
-            if (!theme) {
+            if (!currentTheme) {
                 showToast('Por favor, insira um tema.');
                 return;
             }
@@ -58,7 +85,7 @@
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ theme: theme }),
+                    body: JSON.stringify({ theme: currentTheme }),
                 });
 
                 const result = await response.json();
@@ -69,8 +96,15 @@
                 document.getElementById('prayer-text').innerHTML = 
                     result.prayer.split('\n').map(p => `<p>${p}</p>`).join('');
                 
-                // Configura o botão voltar baseado na origem
-                const backButton = document.querySelector('#devotional-result .button-group button');
+                // Configura os botões
+                const saveButton = document.getElementById('save-history-btn');
+                const backButton = document.querySelector('#devotional-result .button-group .secondary-button');
+                
+                saveButton.onclick = (e) => {
+                    e.preventDefault();
+                    saveToHistory();
+                };
+
                 backButton.onclick = mode === 'list' 
                     ? () => {
                         document.getElementById('devotional-result').classList.add('hidden');
