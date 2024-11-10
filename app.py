@@ -1,11 +1,13 @@
 import os
 from flask import Flask, render_template, jsonify, request
 from flask_cors import CORS
-from backend.agents.devotional_generator import DevotionalGenerator  # Ajustando o caminho do import
+from backend.agents.devotional_generator import DevotionalGenerator
 
-app = Flask(__name__, template_folder='templates', static_folder='static')  # Removendo ../../
+# Inicialização do Flask com caminhos relativos
+app = Flask(__name__)  # Removendo os parâmetros de template e static
 CORS(app)
 
+# Inicialização do gerador
 generator = DevotionalGenerator()
 
 @app.route('/')
@@ -29,7 +31,7 @@ def generate():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-# Configuração para produção (Render)
+# Configuração para produção
 if __name__ == '__main__':
-    port = int(os.environ.get("PORT", 5000))
+    port = int(os.environ.get("PORT", 10000))
     app.run(host='0.0.0.0', port=port)
