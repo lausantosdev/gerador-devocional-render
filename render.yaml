@@ -2,12 +2,10 @@ services:
   - type: web
     name: gerador-devocional-render
     env: python
-    buildCommand: pip install -r requirements.txt
-    startCommand: python app.py
+    buildCommand: pip uninstall uvicorn -y && pip install -r requirements.txt
+    startCommand: gunicorn app:app --bind 0.0.0.0:$PORT
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.8
       - key: OPENAI_API_KEY
         sync: false
-      - key: PORT
-        value: 10000
