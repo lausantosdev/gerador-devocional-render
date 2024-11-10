@@ -1,9 +1,9 @@
 import os
 from flask import Flask, render_template, jsonify, request
 from flask_cors import CORS
-from devotional_generator import DevotionalGenerator
+from backend.agents.devotional_generator import DevotionalGenerator  # Ajustando o caminho do import
 
-app = Flask(__name__, template_folder='../../templates', static_folder='../../static')
+app = Flask(__name__, template_folder='templates', static_folder='static')  # Removendo ../../
 CORS(app)
 
 generator = DevotionalGenerator()

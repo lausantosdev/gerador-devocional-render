@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: gerador-devocional
+    name: gerador-devocional-render    # Atualizando para combinar com o nome do repo
     env: python
     buildCommand: pip install -r requirements.txt
     startCommand: uvicorn app:app --host 0.0.0.0 --port $PORT
