@@ -3,9 +3,11 @@ services:
     name: gerador-devocional-render
     env: python
     buildCommand: pip install -r requirements.txt
-    startCommand: python -m flask run --host 0.0.0.0 --port $PORT
+    startCommand: flask run --host 0.0.0.0 --port $PORT
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.8
       - key: OPENAI_API_KEY
         sync: false
+      - key: FLASK_APP
+        value: app.py
