@@ -1,3 +1,4 @@
+import os
 from flask import Flask, render_template, jsonify, request
 from flask_cors import CORS
 from devotional_generator import DevotionalGenerator
@@ -28,5 +29,7 @@ def generate():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+# Configuração para produção (Render)
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
